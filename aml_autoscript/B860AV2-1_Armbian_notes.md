@@ -35,7 +35,7 @@ dd if=/dev/block/<名字> of=<目录>/<名字>.img bs=1M
 - `dtb/meson8m2-b860a.dtb`
 - `armbianEnv.txt`
 - `s905_autoscript`、`s805_autoscript`、`aml_autoscript`
-
+这几个都要有，cp s805_autoscript s905_autoscript
 ## U-Boot 手动启动
 
 串口 115200，一通电就连按回车（`bootdelay=1`，只有 1 秒）。
