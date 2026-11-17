@@ -53,7 +53,7 @@ fatload mmc 0 1020000 s905_autoscript
 autoscr 1020000
 ```
 
-## 自动启动（写入 env 分区，会写 eMMC）
+## 自动启动（写入 env 分区，会写入一部分eMMC）
 
 中兴代码开机会把 `preboot` 改回去，`bootcmd` 也不起作用，所以挂在 `update_key` 上。
 
@@ -63,6 +63,18 @@ setenv update_key 'saradc open 0; if saradc get_in_range 0 0x50; then msleep 50;
 run update_key             # 先在内存里测试
 saveenv
 reset
+```
+
+
+## usb启动
+```
+setenv update_key 'saradc open 0; if saradc get_in_range 0 0x50; then msleep 50; if saradc get_in_range 0 0x50; then echo update by key...; run update; fi; fi; if mmcinfo; then run start_mmc_autoscript; fi; if usb start; then run start_usb_autoscript; fi;'
+printenv update_key
+saveenv
+reset
+检查
+printenv start_mmc_autoscript
+printenv start_usb_autoscript
 ```
 
 原值：
